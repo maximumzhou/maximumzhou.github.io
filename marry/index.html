@@ -41,6 +41,7 @@
 	$(document).ready ( function () {
 		$(document).click (function () {
 			$("#clickme").css("display","none");
+			$("#clickme").stop();
 			var bgm = document.getElementById("bgm");
 			bgm.play();
 			bgm.addEventListener('ended', function(){
