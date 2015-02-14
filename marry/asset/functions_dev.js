@@ -53,7 +53,7 @@ function showContent() {
 		f();
 		
 	}
-	flash('clickme');
+	//flash('clickme');
 
 	
 	
