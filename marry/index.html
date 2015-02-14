@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <!-- saved from url=(0029)http://hackerzhou.me/ex_love/ -->
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="user-scalable=no">
 	<title></title>
 	
 	<style type="text/css">
@@ -42,8 +44,10 @@
 		$("#clickme").css("display","block");
 		showContent();
 		$(document).click (function () {
-			$("#clickme").css("display","none");
 			$("#clickme").stop();
+			$("#clickme").css("display","none");
+			
+			$("#mainDiv").css('display','block');
 			var bgm = document.getElementById("bgm");
 			bgm.play();
 			bgm.addEventListener('ended', function(){

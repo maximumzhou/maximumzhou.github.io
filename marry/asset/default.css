@@ -1,5 +1,5 @@
 body{margin:0;padding:0;background:#ffe;font-size:12px;overflow:auto}
-#mainDiv{width:420px;height:250px;
+#mainDiv{width:420px;height:250px;display:none;
 position:absolute;}
 #clickme{width:300px;height:300px;
 position:absolute;font-size:38px;text-align:center;}

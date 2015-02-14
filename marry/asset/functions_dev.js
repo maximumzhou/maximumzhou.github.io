@@ -24,11 +24,24 @@ function showContent() {
     //scaleFactor = 0.3;
 	
 	var ratio = document.width / window.innerWidth;
+	if(isNaN(ratio)){
+		ratio = 1;
+	}
+	
+	var sf = scaleFactor;
+	var sx = heartX;
+	var sy = heartY;
+	if (ratio > 1) {
+		alert('显示异常！');
+		//alert(document.width +' '+ window.innerWidth);
+		//window.innerWidth = document.width;
+		//window.innerHeight = document.height;
+		//alert(document.width +' '+ window.innerWidth);
+		//ratio = 1/ratio;
+	}
 
-	if (ratio > 1) {alert('zoomed');}
-
-    gardenCtx.translate(heartX,heartY);
-    gardenCtx.scale(scaleFactor,scaleFactor);
+    gardenCtx.translate(sx,sy);
+    gardenCtx.scale(sf,sf);
     //alert(window.innerWidth+','+window.innerHeight+','+heartX+','+heartY+','+scaleFactor+','+ws+','+WINDOWSIZE);
     gardenCtx.globalCompositeOperation = "lighter";
     garden = new Garden(gardenCtx, gardenCanvas);
@@ -51,6 +64,7 @@ function showContent() {
 		kk.css('-webkit-transform','translateX('+tox+'px) translateY('+toy+'px) scale('+scaleFactor+","+scaleFactor+")");
 		kk.css('-moz-transform','translateX('+tox+'px) translateY('+toy+'px) scale('+scaleFactor+","+scaleFactor+")");		
 	}
+	
 	centerIt('mainDiv');
 	centerIt('clickme');
 	
