@@ -237,7 +237,10 @@ function saya(){
 			startHeartAnimation();
 		}
 	}
-	next();
+	setTimeout(function () {
+				next();
+			}, 5000);
+	
 }
 
 
