@@ -22,10 +22,14 @@ function showContent() {
 
     var scaleFactor = ws/WINDOWSIZE;
     //scaleFactor = 0.3;
+	
+	var ratio = document.width / window.innerWidth;
+
+	if (ratio > 1) {alert('zoomed');}
 
     gardenCtx.translate(heartX,heartY);
     gardenCtx.scale(scaleFactor,scaleFactor);
-    alert(window.innerWidth+','+window.innerHeight+','+heartX+','+heartY+','+scaleFactor+','+ws+','+WINDOWSIZE);
+    //alert(window.innerWidth+','+window.innerHeight+','+heartX+','+heartY+','+scaleFactor+','+ws+','+WINDOWSIZE);
     gardenCtx.globalCompositeOperation = "lighter";
     garden = new Garden(gardenCtx, gardenCanvas);
 
