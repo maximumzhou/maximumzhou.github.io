@@ -224,7 +224,8 @@ function fadeOut(id,time,callback){
 		if(callback){callback();}
 	});
 }
-
+var diff = 5;
+var direction = 1;
 function playMoreGarden(){
 	var times = 8;
 	var timesA = 8;
@@ -233,7 +234,9 @@ function playMoreGarden(){
 			times--;
 			startHeartAnimation(next);
 		}else if(timesA){
-			HEARTSIZE+=10;
+			HEARTSIZE+=diff*direction;
+			direction*=-1;
+			diff+=5;
 			timesA--;
 			startHeartAnimation(next);
 		}
@@ -265,7 +268,11 @@ function isValentine(){
 }
 function processValentine(){
 	saywords(["哦，对了","今天是情人节哦","祝老婆情人节快乐*^_^*"],
-			playMoreGarden);
+			function(){
+				
+				$("body").addClass('bodyvalentine');
+				playMoreGarden();
+			});
 }
 function isWedding(){
 	return checkDate(4,20);

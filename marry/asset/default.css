@@ -1,4 +1,35 @@
 body{margin:0;padding:0;background:#ffe;font-size:12px;overflow:auto}
+.bodyvalentine
+{
+background:#fdd;
+animation:myfirst 5s;
+-moz-animation:myfirst 5s; /* Firefox */
+-webkit-animation:myfirst 5s; /* Safari and Chrome */
+-o-animation:myfirst 5s; /* Opera */
+}
+@keyframes myfirst
+{
+from {background:#ffe;}
+to {background:#fdd;}
+}
+
+@-moz-keyframes myfirst /* Firefox */
+{
+from {background:#ffe;}
+to {background:#fdd;}
+}
+
+@-webkit-keyframes myfirst /* Safari and Chrome */
+{
+from {background:#ffe;}
+to {background:#fdd;}
+}
+
+@-o-keyframes myfirst /* Opera */
+{
+from {background:#ffe;}
+to {background:#fdd;}
+}
 #mainDiv{width:420px;height:250px;display:none;
 position:absolute;}
 #clickme{width:300px;height:300px;
