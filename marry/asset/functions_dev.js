@@ -6,7 +6,6 @@ var heartX,heartY;
 var HEARTSIZE = 270;
 var WINDOWSIZE = 554;
 
-$(showContent);
 function showContent() {
     // setup garden
 	//$loveHeart = $("#loveHeart");

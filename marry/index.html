@@ -28,7 +28,7 @@
             
         </div>
 	</div>
-	<div id = "clickme">请点击</div>
+	<div id = "clickme" style="display: none;">请点击</div>
 	<audio id="bgm" preload>
 	  <source src="asset/bgm.mp3" type="audio/mpeg">
 	  <source src="asset/bgm.ogg" type="audio/ogg">
@@ -39,6 +39,8 @@
 	
 	
 	$(document).ready ( function () {
+		$("#clickme").css("display","block");
+		showContent();
 		$(document).click (function () {
 			$("#clickme").css("display","none");
 			$("#clickme").stop();
