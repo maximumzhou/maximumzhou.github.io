@@ -38,12 +38,29 @@
 	</audio>
 	<script type="text/javascript">
 	//playMusic();
+	var clickEventName = 'click';
 	
+	
+	
+	function bindClick(obj,fun){
+		if ('ontouchstart' in document.documentElement) {
+			$(obj).bind('touchstart',fun);
+		}else{
+			$(obj).click(fun);
+		}
+	}
+	function unbindClick(obj){
+		if ('ontouchstart' in document.documentElement) {
+			$(obj).unbind('touchstart');
+		}else{
+			$(obj).unbind('click');
+		}
+	}
 	
 	$(document).ready ( function () {
 		$("#clickme").css("display","block");
 		showContent();
-		$(document).bind( "touchstart" ,function () {
+		bindClick( document,function () {
 			$("#clickme").stop();
 			$("#clickme").css("display","none");
 			
@@ -54,7 +71,7 @@
 				this.currentTime = 0;
 				this.play();
 			}, false);
-			$(document).unbind('touchstart');
+			unbindClick(document);
 			playHeart();
 		});
 	});
@@ -70,7 +87,7 @@
 		together.setSeconds(14);
 		together.setMilliseconds(0);
 
-        $("#words").bind( "touchstart" ,function(){
+        bindClick("#words" ,function(){
 			displayMode *= -1;
 			timeElapse(together, displayMode);
 		});
@@ -86,7 +103,7 @@
 		    document.execCommand("stop");
 		} else {
 			setTimeout(function () {
-				startHeartAnimation();
+				startHeartAnimation(null);
 			}, 500);
 
 			timeElapse(together, displayMode);

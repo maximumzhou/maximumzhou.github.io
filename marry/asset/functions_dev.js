@@ -94,7 +94,7 @@ function getHeartPoint(angle) {
 }
 var maxY = 0;
 var minY = 0;
-function startHeartAnimation() {
+function startHeartAnimation(callback) {
 	var interval = 50;
 	var angle = 10;
 	var heart = new Array();
@@ -117,6 +117,7 @@ function startHeartAnimation() {
 		}
 		if (angle >= 30) {
 			clearInterval(animationTimer);
+			if(callback){callback();}
 			//alert((maxY+minY)/2+','+heartY);
 			
 		} else {
@@ -224,6 +225,22 @@ function fadeOut(id,time,callback){
 	});
 }
 
+function playMoreGarden(){
+	var times = 8;
+	var timesA = 8;
+	function next(){
+		if(times){
+			times--;
+			startHeartAnimation(next);
+		}else if(timesA){
+			HEARTSIZE+=10;
+			timesA--;
+			startHeartAnimation(next);
+		}
+	}
+	next();
+}
+
 function saya(){
 	var s = ["哦，对了","今天是情人节哦","祝老婆情人节快乐*^_^*"];
 	function next(){
@@ -231,10 +248,8 @@ function saya(){
 			var b = s.shift();
 			say(b,next);
 		}else{
-			startHeartAnimation();
-			startHeartAnimation();
-			startHeartAnimation();
-			startHeartAnimation();
+			playMoreGarden();
+			
 		}
 	}
 	setTimeout(function () {
