@@ -15,6 +15,7 @@
 	<script type="text/javascript" src="asset/jquery-2.1.3.min.js"></script>
 	<script type="text/javascript" src="asset/garden_dev.js"></script>
     <script type="text/javascript" src="asset/functions_dev.js"></script>
+    <script type="text/javascript" src="asset/chinese-lunar.js"></script>
 </head>
 
 <body>
@@ -38,9 +39,7 @@
 	</audio>
 	<script type="text/javascript">
 	//playMusic();
-	var clickEventName = 'click';
-	
-	
+
 	
 	function bindClick(obj,fun){
 		if ('ontouchstart' in document.documentElement) {
@@ -48,7 +47,7 @@
 		}else{
 			$(obj).click(fun);
 		}
-	}
+	}	
 	function unbindClick(obj){
 		if ('ontouchstart' in document.documentElement) {
 			$(obj).unbind('touchstart');
@@ -66,6 +65,7 @@
 			
 			$("#mainDiv").css('display','block');
 			var bgm = document.getElementById("bgm");
+			
 			bgm.play();
 			bgm.addEventListener('ended', function(){
 				this.currentTime = 0;

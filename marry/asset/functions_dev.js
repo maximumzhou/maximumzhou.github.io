@@ -206,7 +206,7 @@ function showLoveU2(){
 }
 
 function showLast(){
-	fade('sign',3000,saya);
+	fade('sign',3000,judgeDay);
 }
 
 function fade(id,time,callback){
@@ -241,14 +241,157 @@ function playMoreGarden(){
 	next();
 }
 
-function saya(){
-	var s = ["哦，对了","今天是情人节哦","祝老婆情人节快乐*^_^*"];
+function judgeDay(){
+	//情人节
+	if(isValentine()&&1){
+		processValentine();
+	}
+	//结婚纪念日
+	else if(isWedding()&&1){
+		processWedding();
+	}
+	//七夕
+	else if(isQiXi()&&1){
+		processQiXi();
+	}
+	//生日
+	else if(isBirthDay()&&1){
+		processBirthDay();
+	}
+}
+
+function isValentine(){
+	return checkDate(2,14)||checkDate(2,15,2015);
+}
+function processValentine(){
+	saywords(["哦，对了","今天是情人节哦","祝老婆情人节快乐*^_^*"],
+			playMoreGarden);
+}
+function isWedding(){
+	return checkDate(4,20);
+}
+
+function processWedding(){
+	var dateObj= new Date();
+	var _year = dateObj.getFullYear();
+	var t = _year-2014;
+	var ct = Utils.numberToChinese(t);
+	saywords(["哦，对了","今天是我们的结婚"+ct+"周年纪念日哦","愿我们的婚姻长长久久，白头到老*^_^*"],
+	playMoreGarden);
+}
+function isQiXi(){
+	return checkDateLunar(7,7);
+}
+function processQiXi(){
+	saywords(["哦，对了","今天是七夕哦","亲爱的老婆来搭一座鹊桥吧*^_^*"],
+			playMoreGarden);
+}
+function isBirthDay(){
+	return checkDate(11,5);
+}
+function processBirthDay(){
+	saywords(["哦，对了","今天是老婆的生日哦","祝老婆生日快乐*^_^*"],
+			playMoreGarden);
+	
+}
+
+
+
+var Utils={
+    /*
+        单位
+    */
+    units:'个十百千万@#%亿^&~',
+    /*
+        字符
+    */
+    chars:'零一二三四五六七八九',
+    /*
+        数字转中文
+        @number {Integer} 形如123的数字
+        @return {String} 返回转换成的形如 一百二十三 的字符串             
+    */
+    numberToChinese:function(number){
+        var a=(number+'').split(''),s=[],t=this;
+        if(a.length>12){
+            throw new Error('too big');
+        }else{
+            for(var i=0,j=a.length-1;i<=j;i++){
+                if(j==1||j==5||j==9){//两位数 处理特殊的 1*
+                    if(i==0){
+                        if(a[i]!='1')s.push(t.chars.charAt(a[i]));
+                    }else{
+                        s.push(t.chars.charAt(a[i]));
+                    }
+                }else{
+                    s.push(t.chars.charAt(a[i]));
+                }
+                if(i!=j){
+                    s.push(t.units.charAt(j-i));
+                }
+            }
+        }
+        //return s;
+        return s.join('').replace(/零([十百千万亿@#%^&~])/g,function(m,d,b){//优先处理 零百 零千 等
+            b=t.units.indexOf(d);
+            if(b!=-1){
+                if(d=='亿')return d;
+                if(d=='万')return d;
+                if(a[j-b]=='0')return '零'
+            }
+            return '';
+        }).replace(/零+/g,'零').replace(/零([万亿])/g,function(m,b){// 零百 零千处理后 可能出现 零零相连的 再处理结尾为零的
+            return b;
+        }).replace(/亿[万千百]/g,'亿').replace(/[零]$/,'').replace(/[@#%^&~]/g,function(m){
+            return {'@':'十','#':'百','%':'千','^':'十','&':'百','~':'千'}[m];
+        }).replace(/([亿万])([一-九])/g,function(m,d,b,c){
+            c=t.units.indexOf(d);
+            if(c!=-1){
+                if(a[j-c]=='0')return d+'零'+b
+            }
+            return m;
+        });
+    }
+};
+
+
+function checkDate(month,day,year){
+	var dateObj= new Date();
+	var _month = dateObj.getMonth() + 1; //months from 1-12
+	var _day = dateObj.getDate();
+	var _year = dateObj.getFullYear();
+	if(_month!=month||_day!=day){
+		return false;
+	}
+	if(year){
+		return _year==year;
+	}else{
+		return true;
+	}
+}
+function checkDateLunar(month,day,year){
+	
+	var lunar = chineseLunar.solarToLunar(new Date());
+	var _month = lunar.month;
+	var _day = lunar.day;
+	var _year = lunar.year;
+	if(_month!=month||_day!=day){
+		return false;
+	}
+	if(year){
+		return _year==year;
+	}else{
+		return true;
+	}
+}
+
+function saywords(s,callback){
 	function next(){
 		if(s.length){
 			var b = s.shift();
 			say(b,next);
 		}else{
-			playMoreGarden();
+			if(callback){callback();}
 			
 		}
 	}
