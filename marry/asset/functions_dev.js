@@ -26,6 +26,16 @@ function showContent() {
 
     gardenCtx.translate(heartX,heartY);
     gardenCtx.scale(scaleFactor,scaleFactor);
+    alert(window.innerWidth+','+window.innerHeight+','+heartX+','+heartY+','+scaleFactor+','+ws+','+WINDOWSIZE);
+    gardenCtx.globalCompositeOperation = "lighter";
+    garden = new Garden(gardenCtx, gardenCanvas);
+
+    // renderLoop
+
+    setInterval(function () {
+        garden.render();
+    }, Garden.options.growSpeed);
+	
 	
 	
 	function centerIt(id){
@@ -54,29 +64,9 @@ function showContent() {
 		
 	}
 	flash('clickme');
-
-	
-	
-
-	
-	
-	
-	
-	
 	
 	//gardenCtx.fillRect(-2,-2,4,4);
     
-    //alert(window.innerWidth+','+window.innerHeight+','+heartX+','+heartY+','+scaleFactor+','+ws+','+WINDOWSIZE);
-    gardenCtx.globalCompositeOperation = "lighter";
-	
-
-    garden = new Garden(gardenCtx, gardenCanvas);
-
-    // renderLoop
-
-    setInterval(function () {
-        garden.render();
-    }, Garden.options.growSpeed);
 }
 
 function getHeartPoint(angle) {

@@ -50,7 +50,6 @@
 			}, false);
 			$(document).unbind('click');
 			playHeart();
-			showMessages();
 		});
 	});
 	
@@ -88,6 +87,7 @@
 			setInterval(function () {
 				timeElapse(together, displayMode);
 			}, 500);
+			showMessages();
 		}	
 	}
 
