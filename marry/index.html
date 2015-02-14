@@ -43,7 +43,7 @@
 	$(document).ready ( function () {
 		$("#clickme").css("display","block");
 		showContent();
-		$(document).click (function () {
+		$(document).bind( "touchstart" ,function () {
 			$("#clickme").stop();
 			$("#clickme").css("display","none");
 			
@@ -54,7 +54,7 @@
 				this.currentTime = 0;
 				this.play();
 			}, false);
-			$(document).unbind('click');
+			$(document).unbind('touchstart');
 			playHeart();
 		});
 	});
@@ -70,7 +70,7 @@
 		together.setSeconds(14);
 		together.setMilliseconds(0);
 
-        $("#words").click(function(){
+        $("#words").bind( "touchstart" ,function(){
 			displayMode *= -1;
 			timeElapse(together, displayMode);
 		});
