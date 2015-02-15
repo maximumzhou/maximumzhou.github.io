@@ -128,25 +128,27 @@
 				return;
 			}else{
 				var oldVol = bgm.volume;
+				//bgm.muted = true;
 				//bgm.volume = 0;
 				//bgm.pause();
 				//bgm.addEventListener("playing",onProgress, false);
 			}
 			function start(){
 				return;
+				bgm.muted = false;
 				bgm.pause();
 				bgm.currentTime = 0;
 				bgm.play();
 			}
 			function checkStartToPlay(){
-				if(bgm.played.length){
+				if(bgm.currentTime){
 					clearInterval(kk);
-					bgm.volume = oldVol;
-					start();
+					//bgm.volume = oldVol;
+					//start();
 					callback();
 				}
 			}
-			var kk = setInterval(checkStartToPlay,500);
+			var kk = setInterval(checkStartToPlay,100);
 			
 			function onProgress(){
 				if(checkLoaded()||1){
