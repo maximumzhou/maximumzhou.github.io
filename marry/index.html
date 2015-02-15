@@ -125,14 +125,28 @@
 			bgm.play();
 			if(checkLoaded()){
 				callback();
+				return;
 			}else{
+				var oldVol = bgm.volume;
+				bgm.volume = 0.000001;
 				//bgm.pause();
-				bgm.addEventListener("playing",onProgress, false);
+				//bgm.addEventListener("playing",onProgress, false);
 			}
 			function start(){
+				bgm.pause();
 				bgm.currentTime = 0;
 				bgm.play();
 			}
+			function checkStartToPlay(){
+				if(bgm.played.length){
+					clearInterval(kk);
+					bgm.volume = oldVol;
+					start();
+					callback();
+				}
+			}
+			var kk = setInterval(checkStartToPlay,500);
+			
 			function onProgress(){
 				if(checkLoaded()||1){
 					start();
