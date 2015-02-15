@@ -128,11 +128,12 @@
 				return;
 			}else{
 				var oldVol = bgm.volume;
-				bgm.volume = 0.000001;
+				//bgm.volume = 0;
 				//bgm.pause();
 				//bgm.addEventListener("playing",onProgress, false);
 			}
 			function start(){
+				return;
 				bgm.pause();
 				bgm.currentTime = 0;
 				bgm.play();
