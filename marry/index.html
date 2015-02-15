@@ -123,15 +123,27 @@
 				this.play();
 			}, false);
 			bgm.play();
-			var b = bgm.buffered;
-			if(b.length&&b.end(b.length-1)==bgm.duration){
-				//callback();
+			if(checkLoaded()){
+				callback();
 			}else{
-				bgm.addEventListener("canplaythrough", function () {
-					//callback();
-				}, false);
+				//bgm.pause();
+				bgm.addEventListener("playing",onProgress, false);
 			}
-			callback();
+			function start(){
+				bgm.currentTime = 0;
+				bgm.play();
+			}
+			function onProgress(){
+				if(checkLoaded()||1){
+					start();
+					bgm.removeEventListener("playing",onProgress);
+					callback();
+				}
+			}
+			function checkLoaded(){
+				var b = bgm.buffered;
+				return b.length&&parseInt(b.end(b.length-1))==parseInt(bgm.duration);
+			}
 			
 			
 		
