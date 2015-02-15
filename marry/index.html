@@ -103,20 +103,37 @@
 	function readyForClick(){
 		$("#clickme").html('请点击');
 		bindClick( document,function () {
-			$("#clickme").stop();
-			$("#clickme").css("display","none");
 			
-			$("#mainDiv").css('display','block');
+			unbindClick(document);
+			
+			bgmStartPlay(function(){
+				$("#clickme").stop();
+				$("#clickme").css("display","none");
+				
+				$("#mainDiv").css('display','block');
+				playHeart();
+			});
+		});
+	}
+	
+	function bgmStartPlay(callback){
 			var bgm = document.getElementById("bgm");
-			
-			bgm.play();
 			bgm.addEventListener('ended', function(){
 				this.currentTime = 0;
 				this.play();
 			}, false);
-			unbindClick(document);
-			playHeart();
-		});
+			bgm.play();
+			var b = bgm.buffered;
+			if(b.length&&b.end(b.length-1)==bgm.duration){
+				callback();
+			}else{
+				bgm.addEventListener("canplaythrough", function () {
+					callback();
+				}, false);
+			}
+			
+			
+		
 	}
 	
 			
