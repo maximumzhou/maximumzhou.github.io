@@ -125,12 +125,13 @@
 			bgm.play();
 			var b = bgm.buffered;
 			if(b.length&&b.end(b.length-1)==bgm.duration){
-				callback();
+				//callback();
 			}else{
 				bgm.addEventListener("canplaythrough", function () {
-					callback();
+					//callback();
 				}, false);
 			}
+			callback();
 			
 			
 		
